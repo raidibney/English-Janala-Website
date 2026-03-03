@@ -20,16 +20,31 @@ const displaylevelwords = (words) => {
     const wordcontainer =document.getElementById("word-container");
     wordcontainer.innerHTML="";
 
+     if(words.length==0){
+         wordcontainer.innerHTML=`
+         
+         <div class="text-center col-span-full py-10">
+         <img class="mx-auto" src="./assets/alert-error.png">
+  <p class="font-bangla font-medium text-gray-600 ">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+  <h1 class="font-bold text-3xl fnt-bangla">নেক্সট Lesson এ যান</h1>
+</div>
+  
+         
+         `
+        return;
+     }
+
+
     words.forEach((word)=> {
 
         console.log(word);
-const card=document.createElement("div");
+     const card=document.createElement("div");
      card.innerHTML=`
 
-     <div id="" class="bg-white rounded-xl shadow-md text-center py-10 px-5 space-y-4">
-    <h2 class="font-bold text-2xl">${word.word}</h2>
+    <div id="" class="bg-white rounded-xl shadow-md text-center py-10 px-5 space-y-4">
+    <h2 class="font-bold text-2xl">${word.word? word.word:"পাওয়া যায়নি"}</h2>
     <p class="font-semibold text-xl">meaning/pronunciation</p>
-  <div class="font-semibold text-xl font-bangla">"${word.meaning}/ ${word.pronunciation}"</div>
+  <div class="font-semibold text-xl font-bangla">"${word.meaning?word.meaning:"পাওয়া যায়নি"}/ ${word.pronunciation?word.pronunciation:"পাওয়া যায়নি"}"</div>
   <div class="flex justify-between items-center">
     <button class="btn  bg-blue-300"><i class="fa-solid fa-circle-info"></i></button>
     <button class="btn  bg-blue-300"><i class="fa-solid fa-volume-low "></i></i></button>
@@ -38,6 +53,7 @@ const card=document.createElement("div");
      `
      wordcontainer.append(card);
 
+    
     });
 
 }
