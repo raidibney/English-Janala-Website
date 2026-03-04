@@ -1,5 +1,6 @@
 # ENGLISH <img width="25px" src="./assets/logo.png" /> JANALA
 
+live link of the website:https://raidibney.github.io/English-Janala-Website/
 ---
 
 ## ⚡ API Endpoints
