@@ -28,6 +28,45 @@ const loadlevelword =(id) =>{
 
 
 }
+//newly added //////////////////////////////////////////////////////////////////////////////
+const loadwordDetails =async(id) =>{
+    const url=`https://openapi.programming-hero.com/api/word/${id}`;
+    
+    const res= await fetch(url);
+    const details=await res.json();
+    displaywordDetails(details.data);
+   //displaywordDetails(details.data);
+
+};
+
+//newly added //////////////////////////////////////////////////////////////////////////////
+
+const displaywordDetails=(word)=>
+{
+     console.log(word);
+     const detailsBox=document.getElementById("details-container");
+     detailsBox.innerHTML=`
+     <div class="">
+      <h2 class="text-2xl font-bold">${word.word} (  <i class="fa-solid fa-microphone"></i>   :${word.pronunciation})</h2>
+    </div>
+     <div class="">
+      <h2 class="text-2xl font-bold"> Meaning</h2>
+      <p>${word.meaning}</p>
+    </div>
+    <div class="">
+      <h2 class="text-2xl font-bold">Example</h2>
+      <p>${word.sentence}</p>
+    </div>
+    <div class="">
+      <h2 class="text-2xl font-bold">Synonyms</h2>
+      <span class="btn">syn1</span>
+            <span class="btn">syn1</span>
+                  <span class="btn">syn1</span>
+    </div>`;
+     document.getElementById("word_modal").showModal();
+
+
+}
 
 //for display level function 2
 const displaylevelwords = (words) => {
@@ -60,7 +99,7 @@ const displaylevelwords = (words) => {
     <p class="font-semibold text-xl">meaning/pronunciation</p>
   <div class="font-semibold text-xl font-bangla">"${word.meaning?word.meaning:"পাওয়া যায়নি"}/ ${word.pronunciation?word.pronunciation:"পাওয়া যায়নি"}"</div>
   <div class="flex justify-between items-center">
-    <button class="btn  bg-blue-300"><i class="fa-solid fa-circle-info"></i></button>
+    <button onclick="loadwordDetails(${word.id})" class="btn  bg-blue-300"><i class="fa-solid fa-circle-info"></i></button>
     <button class="btn  bg-blue-300"><i class="fa-solid fa-volume-low "></i></i></button>
   </div>
   </div>
