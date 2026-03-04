@@ -5,12 +5,26 @@ const loadlesson =() =>{
     .then(res=>res.json())
     .then(json=> displaylessons(json.data));
 };
+
+const removeactive=()=>{
+    const lessonbutton = document.querySelectorAll(".lesson-btn");
+   
+    lessonbutton.forEach((btn)=>btn.classList.remove("active"));
+}
 //load level word function 
 const loadlevelword =(id) =>{
-const url=`https://openapi.programming-hero.com/api/level/${id}`;
+       
+     const url=`https://openapi.programming-hero.com/api/level/${id}`;
      fetch(url)
     .then(res=>res.json())
-     .then(data=>  displaylevelwords(data.data));
+     .then((data) =>  {
+     removeactive();
+    const clickbtn=document.getElementById(`lesson-btn-${id}`);
+
+    clickbtn.classList.add("active");
+
+        displaylevelwords(data.data);
+     });
 
 
 }
@@ -37,7 +51,7 @@ const displaylevelwords = (words) => {
 
     words.forEach((word)=> {
 
-        console.log(word);
+       // console.log(word);
      const card=document.createElement("div");
      card.innerHTML=`
 
@@ -73,7 +87,8 @@ const displaylessons =(lessons) =>{
      console.log(lesson);
      const btnDiv=document.createElement("div");
      btnDiv.innerHTML=`
-     <button onclick="loadlevelword(${lesson.level_no} )"class="btn btn-primary btn-outline">
+     <button id="lesson-btn-${lesson.level_no}"
+      onclick="loadlevelword(${lesson.level_no} )"class="btn lesson-btn">
           <img src="./assets/fa-book-open.png">
           Lesson- ${lesson.level_no} </button>
      `
@@ -81,10 +96,5 @@ const displaylessons =(lessons) =>{
     levelcontainer.append(btnDiv);
 
 }
-
-
-
-
-
    
 };
